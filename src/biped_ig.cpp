@@ -9,7 +9,6 @@
 #include <algorithm>
 #include <cctype>
 
-#include "example-robot-data/path.hpp"
 #include "pinocchio/algorithm/center-of-mass.hpp"
 #include "pinocchio/algorithm/centroidal.hpp"
 #include "pinocchio/algorithm/rnea.hpp"
@@ -18,34 +17,6 @@
 
 namespace aig {
 
-BipedIGSettings makeSettingsFor(std::string robot_name) {
-  BipedIGSettings robot_settings;
-
-  std::transform(robot_name.begin(), robot_name.end(), robot_name.begin(),
-                 [](unsigned char c) { return std::tolower(c); });
-  if (robot_name == "talos") {
-    // const std::string path_to_robots =
-    // "/opt/pal/ferrum/share/talos_description";
-    const std::string path_to_robots =
-        EXAMPLE_ROBOT_DATA_MODEL_DIR "/talos_data";
-    robot_settings.urdf_path = path_to_robots + "/robots/talos_reduced.urdf";
-    robot_settings.srdf_path = path_to_robots + "/srdf/talos.srdf";
-
-    robot_settings.left_hip_joint_name = "leg_left_1_joint";
-    robot_settings.right_hip_joint_name = "leg_right_1_joint";
-    robot_settings.left_knee_joint_name = "leg_left_4_joint";
-    robot_settings.right_knee_joint_name = "leg_right_4_joint";
-    robot_settings.left_ankle_joint_name = "leg_left_5_joint";
-    robot_settings.right_ankle_joint_name = "leg_right_5_joint";
-    robot_settings.left_foot_frame_name = "leg_left_sole_fix_joint";
-    robot_settings.right_foot_frame_name = "leg_right_sole_fix_joint";
-  } else {
-    throw std::runtime_error(
-        "biped_ig::aig::make_settings_for: No default settings for "
-        "a robot with this name were specified yet.");
-  }
-  return robot_settings;
-}
 
 BipedIG::BipedIG() {
   // initialized by default:
