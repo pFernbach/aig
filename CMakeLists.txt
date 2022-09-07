@@ -40,7 +40,7 @@ check_minimal_cxx_standard(11 ENFORCE)
 
 # Dependencies
 add_project_dependency(pinocchio REQUIRED)
-if(BUILD_TESTING)
+if(False)
   find_package(Boost REQUIRED COMPONENTS unit_test_framework)
   find_package(example-robot-data REQUIRED)
 endif()
@@ -64,7 +64,7 @@ if(SUFFIX_SO_VERSION)
   set_target_properties(${PROJECT_NAME} PROPERTIES SOVERSION ${PROJECT_VERSION})
 endif()
 
-if(BUILD_TESTING)
+if(False)
   # Unit-Tests dependencies
   set(${PROJECT_NAME}_CPP_TESTS
       test_dependencies_usage #
